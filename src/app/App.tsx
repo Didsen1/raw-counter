@@ -60,6 +60,15 @@ function App() {
             </div>
               : " "
           }
+          {mortar ?
+            <div className={styles.App__OutputDiv}>
+              <h2 className={styles.App__OutputTitle}>Для кирпичей нужно: </h2>
+              {Array.from(mortar.entries() || []).map(([name, value], index) => (
+                <OutputP index={index} name={name} value={value} stackLimit={32} chestFlag={true} itemType={` `} />
+              ))}
+            </div>
+
+            : " "}
           {
             log ?
               <div className={styles.App__OutputDiv}>
@@ -70,15 +79,6 @@ function App() {
               </div>
               : ' '
           }
-          {mortar ?
-            <div className={styles.App__OutputDiv}>
-              <h2 className={styles.App__OutputTitle}>Для кипрпичей нужно: </h2>
-              {Array.from(mortar.entries() || []).map(([name, value], index) => (
-                <OutputP index={index} name={name} value={value} stackLimit={32} chestFlag={true} itemType={` `} />
-              ))}
-            </div>
-
-            : " "}
         </div>
       </div>
       <button type='button' onClick={handleKeyDown} className={styles.App__button}>Обработать</button>

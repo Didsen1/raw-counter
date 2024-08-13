@@ -20,10 +20,10 @@ const BuildingMortarCounter = (parseData: any) => {
     ));
 
 
-    mortarResult.set("Строительный раствор", allMortarCost);
-    mortarResult.set("Песок для строительного раствора", allMortarCost / 16);
-    mortarResult.set("Флюс для известковой воды", allMortarCost / 16 / 1.25);
-    mortarResult.set("Известь  для известковой воды", allMortarCost / 16 / 2.5);
+    mortarResult.set("Строительного раствора", allMortarCost);
+    mortarResult.set("Песока для строительного раствора", allMortarCost / 16);
+    mortarResult.set("Флюса для известковой воды", allMortarCost / 16 / 1.25);
+    mortarResult.set("Извести  для известковой воды", allMortarCost / 16 / 2.5);
 
     return mortarResult;
 }
