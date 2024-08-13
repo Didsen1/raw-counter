@@ -3,13 +3,14 @@ import styles from "./App.module.scss"
 import WoodCounter from '../WoodCounter/WoodCounter';
 import BricksCounter from '../BricksCounter/BricksCounter';
 import BuildingMortarCounter from '../BuildingMortarCounter/BuildingMortarCounter';
+import OutputP from '../OutputP/OutputP';
 
 function App() {
 
   const [inputData, setInputData] = useState('');
   const [log, setLog] = useState<{ materials: Map<string, number>, otherItems: any[] } | null>(null);
   const [cobble, setCobble] = useState<{ materials: Map<string, number>, otherItems: any[] } | null>(null);
-  const [mortar, setMortar] = useState<number>()
+  const [mortar, setMortar] = useState<Map<string, number> | null>(null);
   let result: any[] = [];
 
   const handleKeyDown = () => {
@@ -53,8 +54,8 @@ function App() {
           {
             cobble ? <div className={styles.App__OutputDiv}>
               <h2 className={styles.App__OutputTitle}>Булыга: </h2>
-              {Array.from(cobble?.materials.entries() || []).map(([key, value], index) => (
-                <p className={styles.App__OutputP} key={index}>{`${key} Cobble: ${Math.ceil(value)}`}</p>
+              {Array.from(cobble?.materials.entries() || []).map(([name, value], index) => (
+                <OutputP index={index} name={name} value={value} stackLimit={32} chestFlag={true} itemType={`Cobble`} />
               ))}
             </div>
               : " "
@@ -63,19 +64,18 @@ function App() {
             log ?
               <div className={styles.App__OutputDiv}>
                 <h2 className={styles.App__OutputTitle}>Бревна: </h2>
-                {Array.from(log?.materials.entries() || []).map(([key, value], index) => (
-                  <p className={styles.App__OutputP} key={index}>{`${key} Log: ${Math.ceil(value)}`}</p>
+                {Array.from(log?.materials.entries() || []).map(([name, value], index) => (
+                  <OutputP index={index} name={name} value={value} stackLimit={16} chestFlag={false} itemType={`Log`} />
                 ))}
               </div>
               : ' '
           }
           {mortar ?
             <div className={styles.App__OutputDiv}>
-              <h2 className={styles.App__OutputTitle}>Раствор: </h2>
-              <>
-                <p className={styles.App__OutputP}>Всего нужно строительного раствора: {mortar}</p>
-                <p className={styles.App__OutputP}>Песка на строительный раствор нужно: {Math.ceil(mortar / 16)}</p>
-              </>
+              <h2 className={styles.App__OutputTitle}>Для кипрпичей нужно: </h2>
+              {Array.from(mortar.entries() || []).map(([name, value], index) => (
+                <OutputP index={index} name={name} value={value} stackLimit={32} chestFlag={true} itemType={` `} />
+              ))}
             </div>
 
             : " "}

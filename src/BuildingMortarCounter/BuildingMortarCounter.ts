@@ -3,6 +3,8 @@ import calculateMaterials from "../СalculateMaterials/СalculateMaterials";
 
 const BuildingMortarCounter = (parseData: any) => {
 
+    const mortarResult = new Map<string, number>();
+
     const itemCosts: IItemCosts = {
         'Bricks': 2,
         'Brick Wall': 1,
@@ -17,11 +19,13 @@ const BuildingMortarCounter = (parseData: any) => {
         allMortarCost += value
     ));
 
-    console.log(`Всего нужно строительного раствора: ${allMortarCost}`)
-    console.log(`Песка на строительный раствор нужно: ${Math.ceil(allMortarCost / 16)}`)
-    // на 16 раствора надо 1 песок
 
-    return allMortarCost;
+    mortarResult.set("Строительный раствор", allMortarCost);
+    mortarResult.set("Песок для строительного раствора", allMortarCost / 16);
+    mortarResult.set("Флюс для известковой воды", allMortarCost / 16 / 1.25);
+    mortarResult.set("Известь  для известковой воды", allMortarCost / 16 / 2.5);
+
+    return mortarResult;
 }
 
 export default BuildingMortarCounter; 
