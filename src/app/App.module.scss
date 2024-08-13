@@ -1,20 +1,23 @@
 .App {
   display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.App__wrapper {
+  display: flex;
   flex-direction: row;
   justify-content: center;
-  padding: 10px;
 }
 
 p {
   margin: 0;
 }
 
-.App__Container {
-  width: 40%;
-  height: 60vh;
-  margin-right: 20px;
-  border: 1px solid black;
-  padding: 5px;
+.App__button {
+  width: 80%;
+  align-self: center;
+  margin-top: 20px;
 }
 
 .App__textArea {
@@ -25,4 +28,37 @@ p {
   box-sizing: border-box;
   border: none;
   outline: none;
+}
+
+.App__Container {
+  width: 40%;
+  height: 60vh;
+  border: 1px solid black;
+  padding: 10px;
+  box-sizing: border-box;
+  overflow: auto;
+}
+
+.App__Container:not(:last-child) {
+  margin-right: 20px;
+}
+
+.App__OutputDiv {
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.App__OutputDiv:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.App__OutputTitle {
+  margin: 0 0 10px 0;
+  font-weight: 500;
+}
+
+.App__OutputP {
+  margin-bottom: 10px;
 }
