@@ -11,8 +11,8 @@ const OutputP = ({ index, name, value, stackLimit, chestFlag, itemType }: { inde
         stack = RawVulue / stackLimit
     }
 
-    if (chestFlag && stack != null && stack > 54) {
-        chest = stack / 54;
+    if (chestFlag && stack != null && stack > 32) {
+        chest = stack / 32;
     }
 
     return (
@@ -21,4 +21,4 @@ const OutputP = ({ index, name, value, stackLimit, chestFlag, itemType }: { inde
     )
 }
 
-export default OutputP
+export default OutputP;

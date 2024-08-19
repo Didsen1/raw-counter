@@ -1,29 +1,23 @@
 import React, { useState } from 'react';
 import styles from "./App.module.scss"
-import WoodCounter from '../WoodCounter/WoodCounter';
-import BricksCounter from '../BricksCounter/BricksCounter';
 import BuildingMortarCounter from '../BuildingMortarCounter/BuildingMortarCounter';
+import calculateMaterials from '../СalculateMaterials/СalculateMaterials';
+import {LogCosts, BricksCosts} from '../Utils/ItemCostsLists';
 import OutputP from '../OutputP/OutputP';
+import DataItem from '../Utils/IDataItem';
 
 function App() {
 
   const [inputData, setInputData] = useState('');
-  const [log, setLog] = useState<{ materials: Map<string, number>, otherItems: any[] } | null>(null);
-  const [cobble, setCobble] = useState<{ materials: Map<string, number>, otherItems: any[] } | null>(null);
+  const [log, setLog] = useState<{ materials: Map<string, number>, otherItems: (DataItem | null)[] } | null>(null);
+  const [cobble, setCobble] = useState<{ materials: Map<string, number>, otherItems: (DataItem | null)[] } | null>(null);
   const [mortar, setMortar] = useState<Map<string, number> | null>(null);
-  let result: any[] = [];
 
   const handleKeyDown = () => {
-
-    result = parseData(inputData);
-
-    const woodResult = WoodCounter(result);
-    const brickResult = BricksCounter(result);
-    const mortarResult = BuildingMortarCounter(result)
-
-    setLog(woodResult);
-    setCobble(brickResult);
-    setMortar(mortarResult);
+    const result: any[] = parseData(inputData);
+    setLog(calculateMaterials(result, LogCosts));
+    setCobble(calculateMaterials(result, BricksCosts));
+    setMortar(BuildingMortarCounter(result));
   };
 
   const parseData = (inputData: string) => {
